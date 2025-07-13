@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_order_address">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="page py-0 m-0"
+                         style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif;">
+                        <div class="m-0 p-0">
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">GÖNDERİCİ:</p>
+                            <p style="font-weight: bold;font-size: 16px;display: inline-block;"
+                               t-field="doc.company_id.partner_id.name"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">ALICI:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.partner_shipping_id.name"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">ADRES:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.partner_shipping_id.street"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">Telefon:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.partner_shipping_id.phone"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">Teslim Yöntemi:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.carrier_id.name"/>
+                        </div>
+                        <div class="mt-4 mb-0 mx-0 p-0">
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">GÖNDERİCİ:</p>
+                            <p style="font-weight: bold;font-size: 16px;display: inline-block;"
+                               t-field="doc.company_id.partner_id.name"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">ALICI:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.partner_shipping_id.name"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">ADRES:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.partner_shipping_id.street"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">Telefon:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.partner_shipping_id.phone"/>
+                            <br/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;">Teslim Yöntemi:</p>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
+                               t-field="doc.carrier_id.name"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_saleorder_delivery_method" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div t-if="doc.carrier_id" class="col-auto col-3 mw-100 mb-2">
+                <strong>Delivery Method:</strong>
+                <p class="m-0" t-field="doc.carrier_id"/>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-foreach='doc.order_line']" position="after">
+            <t t-set="total_qty" t-value="0"/>
+            <t t-set="uoms" t-value="doc.order_line.filtered(lambda x: not x.display_type).mapped('product_uom')"/>
+            <t t-if="doc.order_line.filtered(lambda x: not x.display_type)">
+                <t t-set="total_qty" t-value="sum(doc.order_line.filtered(lambda x: not x.display_type).mapped('product_uom_qty'))"/>
+            </t>
+            <t t-if="total_qty">
+                <tr class="'bg-200 font-weight-bold o_line_section'">
+                    <td name="td_total_quantity" class="text-right" colspan="2">
+                        <span t-esc="total_qty"/>
+                        <t t-if="uoms">
+                            <t t-if="len(set(uoms)) == 1">
+                                <span t-esc="uoms[0].name" groups="uom.group_uom"/>
+                            </t>
+                            <t t-else="">
+                                <span t-esc="uoms[-1].name" style="opacity: 0;" groups="uom.group_uom"/>
+                            </t>
+                        </t>
+                    </td>
+                    <td colspan="4"/>
+                </tr>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <template id="report_invoice_document_qty_total" inherit_id="account.report_invoice_document">
+            <xpath expr="//t[@t-foreach='lines']" position="after">
+                <t t-set="total_qty" t-value="0"/>
+                <t t-set="uoms" t-value="o.invoice_line_ids.filtered(lambda x: not x.display_type).mapped('product_uom_id')"/>
+                <t t-if="o.invoice_line_ids.filtered(lambda x: not x.display_type)">
+                    <t t-set="total_qty" t-value="sum(o.invoice_line_ids.filtered(lambda x: not x.display_type).mapped('quantity'))"/>
+                </t>
+                <tr class="'bg-200 font-weight-bold o_line_section'">
+                    <td name="td_total_quantity" class="text-right" colspan="2">
+                        <span t-esc="total_qty"/>
+                        <t t-if="uoms">
+                            <t t-if="len(set(uoms)) == 1">
+                                <span t-esc="uoms[0].name" groups="uom.group_uom"/>
+                            </t>
+                            <t t-else="">
+                                <span t-esc="uoms[-1].name" style="opacity: 0;" groups="uom.group_uom"/>
+                            </t>
+                        </t>
+                    </td>
+                    <t t-set="remaining_colspan" t-value="3"/>
+                    <td t-if="display_discount">
+                        <t t-set="remaining_colspan" t-value="4"/>
+                    </td>
+                    <td name="td_total_quantity" class="text-right" t-att-colspan="remaining_colspan"/>
+                </tr>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
