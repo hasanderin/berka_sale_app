@@ -8,7 +8,7 @@
                          style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif;">
                         <div class="m-0 p-0">
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">GÖNDERİCİ:</p>
-                            <p style="font-weight: bold;font-size: 16px;display: inline-block;"
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
                                t-field="doc.company_id.partner_id.name"/>
                             <br/>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">ALICI:</p>
@@ -16,8 +16,11 @@
                                t-field="doc.partner_shipping_id.name"/>
                             <br/>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">ADRES:</p>
-                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
-                               t-field="doc.partner_shipping_id.street"/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;" t-field="doc.partner_shipping_id.street"/>
+                            /
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;" t-field="doc.partner_shipping_id.city"/>
+                            /
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;" t-field="doc.partner_shipping_id.state_id.name"/>
                             <br/>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">Telefon:</p>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;"
@@ -29,7 +32,7 @@
                         </div>
                         <div class="mt-4 mb-0 mx-0 p-0">
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">GÖNDERİCİ:</p>
-                            <p style="font-weight: bold;font-size: 16px;display: inline-block;"
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
                                t-field="doc.company_id.partner_id.name"/>
                             <br/>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">ALICI:</p>
@@ -37,8 +40,12 @@
                                t-field="doc.partner_shipping_id.name"/>
                             <br/>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">ADRES:</p>
-                            <p style="font-weight: bold;font-size: 18px;display: inline-block;"
-                               t-field="doc.partner_shipping_id.street"/>
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;" t-field="doc.partner_shipping_id.street"/>
+                            /
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;" t-field="doc.partner_shipping_id.city"/>
+                            /
+                            <p style="font-weight: bold;font-size: 18px;display: inline-block;" t-field="doc.partner_shipping_id.state_id.name"/>
+
                             <br/>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;">Telefon:</p>
                             <p style="font-weight: bold;font-size: 18px;display: inline-block;"
